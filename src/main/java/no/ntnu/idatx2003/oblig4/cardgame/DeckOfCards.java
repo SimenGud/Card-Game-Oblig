@@ -46,16 +46,15 @@ public class DeckOfCards {
    * @thrown IllegalArgumentException if n is less than 1 or greater than the number of cards in the
    */
 
-  public List<PlayingCard> dealHand(int n) {
-
-    if (n < 1 || n > deck.size()) {
-      throw new IllegalArgumentException("Number of cards must be between 1 and " + deck.size());
+  public HandOfCards dealHand(int n) {
+    if (n < 5 || n > deck.size()) {
+      throw new IllegalArgumentException("Antall kort må være mellom 5 og " + deck.size());
     }
-    List<PlayingCard> hand = new ArrayList<>();
-    Random random = new Random();
+    HandOfCards hand = new HandOfCards();
     for (int i = 0; i < n; i++) {
-      hand.add(deck.remove(random.nextInt(deck.size())));
+      hand.addCard(deck.remove(0));
     }
     return hand;
   }
+
 }
