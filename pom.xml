@@ -91,7 +91,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>no.ntnu.idatx2003.oblig4.cardgame.CardGameGUI</mainClass>
+                    <mainClass>no.ntnu.idatx2003.oblig4.cardgame.gui.CardGameGUI</mainClass>
                 </configuration>
             </plugin>
         </plugins>

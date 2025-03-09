@@ -1,4 +1,4 @@
-package no.ntnu.idatx2003.oblig4.cardgame;
+package no.ntnu.idatx2003.oblig4.cardgame.gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
