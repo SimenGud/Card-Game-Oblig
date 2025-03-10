@@ -46,6 +46,20 @@ public class PlayingCardTest {
   }
 
   @Test
+  void equals_NullObject_ShouldReturnFalse() {
+    PlayingCard card = new PlayingCard('H', 5);
+    assertFalse(card.equals(null), "A PlayingCard should not be equal to null");
+  }
+
+  @Test
+  void equals_DifferentClass_ShouldReturnFalse() {
+    PlayingCard card = new PlayingCard('D', 10);
+    String differentObject = "Not a PlayingCard";
+    assertFalse(card.equals(differentObject), "A PlayingCard should not be equal to an object of a different class");
+  }
+
+
+  @Test
   void exception_Face_PlayingCard_Test1() {
     assertThrows(IllegalArgumentException.class, () -> new PlayingCard('H', 14));
   }
