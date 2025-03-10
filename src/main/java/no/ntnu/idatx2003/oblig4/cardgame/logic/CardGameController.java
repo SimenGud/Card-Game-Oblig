@@ -2,13 +2,12 @@ package no.ntnu.idatx2003.oblig4.cardgame.logic;
 
 import no.ntnu.idatx2003.oblig4.cardgame.models.DeckOfCards;
 import no.ntnu.idatx2003.oblig4.cardgame.models.HandOfCards;
-import no.ntnu.idatx2003.oblig4.cardgame.models.PlayingCard;
 
-public class GameController {
+public class CardGameController {
   private final DeckOfCards deck;
   private HandOfCards lastHand; // Store the last dealt hand
 
-  public GameController() {
+  public CardGameController() {
     this.deck = new DeckOfCards();
   }
 

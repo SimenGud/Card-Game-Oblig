@@ -14,17 +14,16 @@ import no.ntnu.idatx2003.oblig4.cardgame.logic.*;
 import no.ntnu.idatx2003.oblig4.cardgame.logic.CardImageMapper;
 import no.ntnu.idatx2003.oblig4.cardgame.models.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class CardGameGUI extends Application implements CardGameInterface {
   private HBox cardDisplay;
   private Label resultLabel;
-  private GameController gameController;
+  private CardGameController cardGameController;
 
   @Override
   public void start(Stage primaryStage) {
-    gameController = new GameController(); // Create game controller
+    cardGameController = new CardGameController(); // Create game controller
 
     cardDisplay = new HBox(10);
     cardDisplay.setAlignment(Pos.CENTER);
@@ -55,7 +54,7 @@ public class CardGameGUI extends Application implements CardGameInterface {
   @Override
   public void dealCards() {
     cardDisplay.getChildren().clear();
-    HandOfCards hand = gameController.dealHand();
+    HandOfCards hand = cardGameController.dealHand();
 
     for (PlayingCard card : hand.getCards()) {
       Image cardImage = new Image(getClass().getResource("/cards/" + CardImageMapper.getImageForCard(card)).toExternalForm());
@@ -68,7 +67,7 @@ public class CardGameGUI extends Application implements CardGameInterface {
 
   @Override
   public void checkHand() {
-    HandOfCards hand = gameController.getLastHand();
+    HandOfCards hand = cardGameController.getLastHand();
     if (hand == null) {
       resultLabel.setText("No hand dealt yet!");
       return;
