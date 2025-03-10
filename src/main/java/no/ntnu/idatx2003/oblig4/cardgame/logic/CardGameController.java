@@ -3,6 +3,16 @@ package no.ntnu.idatx2003.oblig4.cardgame.logic;
 import no.ntnu.idatx2003.oblig4.cardgame.models.DeckOfCards;
 import no.ntnu.idatx2003.oblig4.cardgame.models.HandOfCards;
 
+/**
+ * Game Controller class for a card game.
+ * This class is responsible for controlling the game logic, such as dealing hands of cards and
+ * checking the hands for winning conditions.
+ *
+ * @author Simen Gudbrandsen
+ * @version 0.1
+ * @since 10.03.2025
+ */
+
 public class CardGameController {
   private final DeckOfCards deck;
   private HandOfCards lastHand; // Store the last dealt hand

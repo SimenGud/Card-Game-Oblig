@@ -7,6 +7,10 @@ import java.util.List;
 /**
  * Represents a deck of cards. A deck of cards contains 52 cards, one of each combination of suit
  * and face value.
+ *
+ * @author Simen Gudbrandsen
+ * @version 0.1
+ * @since 10.03.2025
  */
 
 public class DeckOfCards {

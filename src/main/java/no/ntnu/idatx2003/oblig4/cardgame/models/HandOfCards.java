@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 /**
  * Represents a hand of cards dealt to a player.
+ *
+ * @author Simen Gudbrandsen
+ * @version 0.1
+ * @since 10.03.2025
  */
 public class HandOfCards {
   private final List<PlayingCard> hand;

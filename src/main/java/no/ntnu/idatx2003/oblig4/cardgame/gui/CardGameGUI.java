@@ -15,6 +15,17 @@ import no.ntnu.idatx2003.oblig4.cardgame.models.*;
 
 import java.util.stream.Collectors;
 
+/**
+ * A simple GUI for a card game.
+ *
+ * The GUI displays a hand of cards and provides buttons for
+ * dealing a new hand and checking the hand.
+ *
+ * @author Simen Gudbrandsen
+ * @version 0.1
+ * @since 10.03.2025
+ */
+
 public class CardGameGUI extends Application implements CardGameInterface {
   private HBox cardDisplay;
   private Label resultLabel;
