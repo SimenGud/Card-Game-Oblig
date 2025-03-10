@@ -11,7 +11,6 @@ public class CardGameController {
     this.deck = new DeckOfCards();
   }
 
-
   /**
    * Deals a hand of 5 cards from the deck.
    *

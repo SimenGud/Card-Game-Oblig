@@ -1,8 +1,9 @@
-package no.ntnu.idatx2003.oblig4.cardgame.logic;
+package no.ntnu.idatx2003.oblig4.cardgame.gui;
 
 import no.ntnu.idatx2003.oblig4.cardgame.models.PlayingCard;
 
 public class CardImageMapper {
+
   public static String getImageForCard(PlayingCard card) {
     String suit = switch (card.getSuit()) {
       case 'H' -> "hearts";

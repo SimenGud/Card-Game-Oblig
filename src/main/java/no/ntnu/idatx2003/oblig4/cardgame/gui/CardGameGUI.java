@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import no.ntnu.idatx2003.oblig4.cardgame.logic.*;
-import no.ntnu.idatx2003.oblig4.cardgame.logic.CardImageMapper;
 import no.ntnu.idatx2003.oblig4.cardgame.models.*;
 
 import java.util.stream.Collectors;
