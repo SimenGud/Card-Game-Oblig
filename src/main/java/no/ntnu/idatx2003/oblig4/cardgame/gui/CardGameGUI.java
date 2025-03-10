@@ -29,7 +29,7 @@ public class CardGameGUI extends Application implements CardGameInterface {
     cardDisplay = new HBox(10);
     cardDisplay.setAlignment(Pos.CENTER);
 
-    resultLabel = new Label("Result: ");
+    resultLabel = new Label("Click 'Deal Cards' to start");
     resultLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: white;");
 
     Button dealButton = new Button("Deal Cards");
@@ -68,18 +68,33 @@ public class CardGameGUI extends Application implements CardGameInterface {
 
   @Override
   public void checkHand() {
-    List<PlayingCard> hand = cardDisplay.getChildren().stream()
-        .filter(node -> node instanceof ImageView)
-        .map(node -> ((ImageView) node).getImage().getUrl())
-        .map(url -> url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf(".png")))
-        .map(CardParser::parseCard)
-        .collect(Collectors.toList());
+    HandOfCards hand = gameController.getLastHand();
+    if (hand == null) {
+      resultLabel.setText("No hand dealt yet!");
+      return;
+    }
 
-    int sum = hand.stream().mapToInt(PlayingCard::getFace).sum();
-    boolean hasQueenOfSpades = hand.stream().anyMatch(card -> card.getSuit() == 'S' && card.getFace() == 12);
+    // Calculate sum of all cards on hand
+    int sum = hand.getCards().stream().mapToInt(PlayingCard::getFace).sum();
 
-    resultLabel.setText("Sum: " + sum + " | Queen of Spades: " + hasQueenOfSpades);
+    // Gives all hearts on hand
+    String hearts = hand.getCards().stream()
+        .filter(card -> card.getSuit() == 'H')
+        .map(PlayingCard::getAsString)
+        .collect(Collectors.joining(" "));
+    if (hearts.isEmpty()) hearts = "No Hearts";
+
+    // Check if hand contains any queen of spades
+    boolean hasQueenOfSpades = hand.getCards().stream()
+        .anyMatch(card -> card.getSuit() == 'S' && card.getFace() == 12);
+
+    // Check for flush
+    boolean hasFlush = hand.hasFlush();
+
+    resultLabel.setText(String.format("Sum: %d | Hearts: %s | Queen of Spades: %b | 5-Flush: %b",
+        sum, hearts, hasQueenOfSpades, hasFlush));
   }
+
 
   public static void main(String[] args) {
     launch(args);
