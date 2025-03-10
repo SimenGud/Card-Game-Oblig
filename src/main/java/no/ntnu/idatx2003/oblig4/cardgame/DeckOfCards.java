@@ -47,8 +47,11 @@ public class DeckOfCards {
    */
 
   public HandOfCards dealHand(int n) {
-    if (n < 5 || n > deck.size()) {
-      throw new IllegalArgumentException("Antall kort må være mellom 5 og " + deck.size());
+    if (deck.isEmpty()) {
+      throw new IllegalStateException("Kortstokken er tom.");
+    }
+    if (n < 1 || n > deck.size()) {
+      throw new IllegalArgumentException("Antall kort må være mellom 1 og " + deck.size());
     }
     HandOfCards hand = new HandOfCards();
     for (int i = 0; i < n; i++) {
