@@ -5,8 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -29,7 +28,17 @@ public class CardGameGUI extends Application {
     VBox layout = new VBox(20, cardDisplay, dealButton);
     layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
-    Scene scene = new Scene(layout, 600, 400);
+    // Load background image
+    Image backgroundImage = new Image(getClass().getResource("/background/background.jpg").toExternalForm());    BackgroundImage bgImage = new BackgroundImage(
+        backgroundImage,
+        BackgroundRepeat.NO_REPEAT,
+        BackgroundRepeat.NO_REPEAT,
+        BackgroundPosition.CENTER,
+        new BackgroundSize(100, 100, true, true, true, true)
+    );
+    layout.setBackground(new Background(bgImage));
+
+    Scene scene = new Scene(layout, 800, 600);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Card Game");
     primaryStage.show();
@@ -49,7 +58,7 @@ public class CardGameGUI extends Application {
 
   private void dealCard() {
     if (!deck.isEmpty()) {
-      String cardName = deck.remove(0);
+      String cardName = deck.remove(5);
       Image cardImage = new Image(getClass().getResource("/cards/" + cardName).toExternalForm());
       ImageView cardView = new ImageView(cardImage);
       cardView.setFitWidth(100);
