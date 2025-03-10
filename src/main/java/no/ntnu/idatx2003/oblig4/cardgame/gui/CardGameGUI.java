@@ -23,7 +23,7 @@ public class CardGameGUI extends Application {
     cardDisplay = new HBox(10);
 
     Button dealButton = new Button("Deal Card");
-    dealButton.setOnAction(e -> dealCard());
+    dealButton.setOnAction(e -> dealCards());
 
     VBox layout = new VBox(20, cardDisplay, dealButton);
     layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
@@ -56,14 +56,18 @@ public class CardGameGUI extends Application {
     Collections.shuffle(deck);
   }
 
-  private void dealCard() {
-    if (!deck.isEmpty()) {
-      String cardName = deck.remove(5);
-      Image cardImage = new Image(getClass().getResource("/cards/" + cardName).toExternalForm());
-      ImageView cardView = new ImageView(cardImage);
-      cardView.setFitWidth(100);
-      cardView.setPreserveRatio(true);
-      cardDisplay.getChildren().add(cardView);
+  private void dealCards() {
+    cardDisplay.getChildren().clear();
+    loadDeck();
+    for (int i = 0; i < 5; i++) {
+      if (!deck.isEmpty()) {
+        String cardName = deck.remove(0);
+        Image cardImage = new Image(getClass().getResource("/cards/" + cardName).toExternalForm());
+        ImageView cardView = new ImageView(cardImage);
+        cardView.setFitWidth(100);
+        cardView.setPreserveRatio(true);
+        cardDisplay.getChildren().add(cardView);
+      }
     }
   }
 
