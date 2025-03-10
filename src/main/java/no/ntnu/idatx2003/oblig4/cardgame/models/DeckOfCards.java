@@ -1,8 +1,7 @@
-package no.ntnu.idatx2003.oblig4.cardgame;
+package no.ntnu.idatx2003.oblig4.cardgame.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import java.util.List;
 
 /**
@@ -47,12 +46,9 @@ public class DeckOfCards {
    */
 
   public HandOfCards dealHand(int n) {
-    if (deck.isEmpty()) {
-      throw new IllegalStateException("Kortstokken er tom.");
-    }
-    if (n < 1 || n > deck.size()) {
-      throw new IllegalArgumentException("Antall kort må være mellom 1 og " + deck.size());
-    }
+    if (deck.isEmpty()) throw new IllegalStateException("The deck is empty.");
+    if (n < 1 || n > deck.size()) throw new IllegalArgumentException("Invalid hand size.");
+
     HandOfCards hand = new HandOfCards();
     for (int i = 0; i < n; i++) {
       hand.addCard(deck.remove(0));
