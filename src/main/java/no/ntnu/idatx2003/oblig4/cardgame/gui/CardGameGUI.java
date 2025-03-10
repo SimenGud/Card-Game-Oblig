@@ -120,6 +120,11 @@ public class CardGameGUI extends Application implements CardGameInterface {
         sum, hearts, hasQueenOfSpades, hasFlush));
   }
 
+  /**
+   * Launches the JavaFX application.
+   *
+   * @param args the command line arguments
+   */
 
   public static void main(String[] args) {
     launch(args);
