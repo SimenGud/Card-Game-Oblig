@@ -46,12 +46,12 @@ public class DeckOfCards {
    */
 
   public HandOfCards dealHand(int n) {
-    if (deck.isEmpty()) throw new IllegalStateException("The deck is empty.");
-    if (n < 1 || n > deck.size()) throw new IllegalArgumentException("Invalid hand size.");
-
+    if (n < 1 || n > deck.size()) {
+      throw new IllegalArgumentException("Invalid hand size: " + n + ". Deck has: " + deck.size() + " cards left.");
+    }
     HandOfCards hand = new HandOfCards();
     for (int i = 0; i < n; i++) {
-      hand.addCard(deck.remove(0));
+      hand.addCard(deck.get(i));
     }
     return hand;
   }
