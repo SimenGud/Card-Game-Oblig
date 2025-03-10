@@ -17,9 +17,9 @@ public class CardImageMapper {
       case 11 -> "J";
       case 12 -> "Q";
       case 13 -> "K";
-      default -> String.format("%02d", card.getFace()); // Example: "09"
+      default -> String.format("%02d", card.getFace());
     };
 
-    return "card_" + suit + "_" + face + ".png"; // Example: "card_hearts_09.png"
+    return "card_" + suit + "_" + face + ".png";
   }
 }

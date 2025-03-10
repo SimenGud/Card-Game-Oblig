@@ -9,11 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import no.ntnu.idatx2003.oblig4.cardgame.logic.CardGameInterface;
+
+import no.ntnu.idatx2003.oblig4.cardgame.logic.*;
 import no.ntnu.idatx2003.oblig4.cardgame.logic.CardImageMapper;
-import no.ntnu.idatx2003.oblig4.cardgame.models.DeckOfCards;
-import no.ntnu.idatx2003.oblig4.cardgame.models.HandOfCards;
-import no.ntnu.idatx2003.oblig4.cardgame.models.PlayingCard;
+import no.ntnu.idatx2003.oblig4.cardgame.models.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +20,11 @@ import java.util.stream.Collectors;
 public class CardGameGUI extends Application implements CardGameInterface {
   private HBox cardDisplay;
   private Label resultLabel;
-  private DeckOfCards deck;
+  private GameController gameController;
 
   @Override
   public void start(Stage primaryStage) {
-    deck = new DeckOfCards(); // Create a deck instance
+    gameController = new GameController(); // Create game controller
 
     cardDisplay = new HBox(10);
     cardDisplay.setAlignment(Pos.CENTER);
@@ -56,7 +55,7 @@ public class CardGameGUI extends Application implements CardGameInterface {
   @Override
   public void dealCards() {
     cardDisplay.getChildren().clear();
-    HandOfCards hand = deck.dealHand(5);
+    HandOfCards hand = gameController.dealHand();
 
     for (PlayingCard card : hand.getCards()) {
       Image cardImage = new Image(getClass().getResource("/cards/" + CardImageMapper.getImageForCard(card)).toExternalForm());
@@ -73,51 +72,13 @@ public class CardGameGUI extends Application implements CardGameInterface {
         .filter(node -> node instanceof ImageView)
         .map(node -> ((ImageView) node).getImage().getUrl())
         .map(url -> url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf(".png")))
-        .map(this::parseCard)
+        .map(CardParser::parseCard)
         .collect(Collectors.toList());
 
     int sum = hand.stream().mapToInt(PlayingCard::getFace).sum();
-
-    String hearts = hand.stream()
-        .filter(card -> card.getSuit() == 'H')
-        .map(PlayingCard::getAsString)
-        .collect(Collectors.joining(" "));
-    if (hearts.isEmpty()) hearts = "No Hearts";
-
     boolean hasQueenOfSpades = hand.stream().anyMatch(card -> card.getSuit() == 'S' && card.getFace() == 12);
 
-    HandOfCards handOfCards = new HandOfCards();
-    hand.forEach(handOfCards::addCard);
-    boolean hasFlush = handOfCards.hasFlush();
-
-    resultLabel.setText(String.format("Sum: %d | Hearts: %s | Queen of Spades: %b | 5-Flush: %b",
-        sum, hearts, hasQueenOfSpades, hasFlush));
-  }
-
-  private PlayingCard parseCard(String cardName) {
-    String[] parts = cardName.replace(".png", "").split("_");
-    if (parts.length != 3) throw new IllegalArgumentException("Invalid card filename: " + cardName);
-
-    char suit = switch (parts[1]) {
-      case "hearts" -> 'H';
-      case "diamonds" -> 'D';
-      case "clubs" -> 'C';
-      case "spades" -> 'S';
-      default -> throw new IllegalArgumentException("Invalid suit: " + parts[1]);
-    };
-
-    int face = switch (parts[2]) {
-      case "A" -> 1;
-      case "J" -> 11;
-      case "Q" -> 12;
-      case "K" -> 13;
-      default -> {
-        try { yield Integer.parseInt(parts[2]); }
-        catch (NumberFormatException e) { throw new IllegalArgumentException("Invalid face value: " + parts[2]); }
-      }
-    };
-
-    return new PlayingCard(suit, face);
+    resultLabel.setText("Sum: " + sum + " | Queen of Spades: " + hasQueenOfSpades);
   }
 
   public static void main(String[] args) {
