@@ -15,6 +15,13 @@ import no.ntnu.idatx2003.oblig4.cardgame.models.PlayingCard;
 
 public class CardImageMapper {
 
+  /**
+   * Returns the image file name for a given PlayingCard.
+   *
+   * @param card the playing card
+   * @return the image file name
+   */
+
   public static String getImageForCard(PlayingCard card) {
     String suit = switch (card.getSuit()) {
       case 'H' -> "hearts";
