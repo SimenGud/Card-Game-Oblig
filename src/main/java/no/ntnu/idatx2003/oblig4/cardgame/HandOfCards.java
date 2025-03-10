@@ -42,6 +42,10 @@ public class HandOfCards {
    * @return true if the hand contains a flush, false otherwise
    */
   public boolean hasFlush() {
+    if (hand.size() < 5) {
+      return false;
+    }
+
     Map<Character, Long> suitCounts = hand.stream()
         .collect(Collectors.groupingBy(PlayingCard::getSuit, Collectors.counting()));
 
