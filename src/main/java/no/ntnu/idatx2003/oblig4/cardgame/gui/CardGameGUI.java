@@ -31,6 +31,12 @@ public class CardGameGUI extends Application implements CardGameInterface {
   private Label resultLabel;
   private CardGameController cardGameController;
 
+  /**
+   * Starts the JavaFX application.
+   *
+   * @param primaryStage the primary stage
+   */
+
   @Override
   public void start(Stage primaryStage) {
     cardGameController = new CardGameController(); // Create game controller
@@ -61,6 +67,11 @@ public class CardGameGUI extends Application implements CardGameInterface {
     primaryStage.show();
   }
 
+  /**
+   * Deals a new hand of cards and displays them in the GUI.
+   * The cards are displayed as images in a horizontal box.
+   */
+
   @Override
   public void dealCards() {
     cardDisplay.getChildren().clear();
@@ -74,6 +85,11 @@ public class CardGameGUI extends Application implements CardGameInterface {
       cardDisplay.getChildren().add(cardView);
     }
   }
+
+  /**
+   * Checks the current hand of cards for winning conditions.
+   * The result is displayed in a label below the card display.
+   */
 
   @Override
   public void checkHand() {
